@@ -1,6 +1,6 @@
-package info.insomniax.owhblank.vault;
+package info.insomniax.owhboop.vault;
 
-import info.insomniax.owhblank.core.BukkitPlugin;
+import info.insomniax.owhboop.core.BukkitPlugin;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 

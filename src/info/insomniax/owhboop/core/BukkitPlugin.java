@@ -1,6 +1,6 @@
-package info.insomniax.owhblank.core;
+package info.insomniax.owhboop.core;
 
-import info.insomniax.owhblank.vault.Permissions;
+import info.insomniax.owhboop.vault.Permissions;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

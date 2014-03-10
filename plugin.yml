@@ -1,0 +1,4 @@
+name: OWHBlank
+description: Blank plugin
+version:9001
+main:info.insomniax.owhblank.core.BukkitPlugin

@@ -2,6 +2,8 @@ package info.insomniax.owhboop.core;
 
 import info.insomniax.owhboop.vault.Permissions;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,8 +19,6 @@ public class BukkitPlugin extends JavaPlugin
 	
 	public void onEnable()
 	{
-		//TODO setup plugin.yml
-		
 		p = new Permissions(this);
 		p.setupPermissions();
 	}
@@ -28,8 +28,29 @@ public class BukkitPlugin extends JavaPlugin
 		this.saveConfig();
 	}
 	
+	public static void sendMessage(String player, String message)
+	{
+		Bukkit.getPlayer(player).sendMessage(message);
+	}
+	
+	public static void broadcast(String message)
+	{
+		Bukkit.broadcastMessage(message);
+	}
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
+		if(p.has(sender, cmd, true))
+		{
+			if(cmd.getName().equalsIgnoreCase("addcensor"))
+			{
+				if(args.length > 0)
+				{
+					OWHBoop.addCensor(StringUtils.join(args, " "));
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 

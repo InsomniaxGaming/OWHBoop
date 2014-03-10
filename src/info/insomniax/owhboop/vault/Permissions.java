@@ -1,7 +1,6 @@
 package info.insomniax.owhboop.vault;
 
 import info.insomniax.owhboop.core.BukkitPlugin;
-import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.apache.commons.lang.StringUtils;
@@ -24,7 +23,6 @@ public class Permissions {
 	
 	BukkitPlugin myPlugin;
 	public static Permission permission = null;
-	public static Economy economy = null;
 	
 	public Permissions(BukkitPlugin instance)
 	{

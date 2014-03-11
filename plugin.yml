@@ -2,3 +2,7 @@ name: OWHBoop
 description: "The OWH Censorship Plugin!"
 version: 0.1
 main:info.insomniax.owhboop.core.BukkitPlugin
+commands:
+  addcensor:
+    usage: "/addcensor <censor>"
+    description: "Adds the new word to the list of words to censor"

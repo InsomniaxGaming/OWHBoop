@@ -44,5 +44,10 @@ public class OWHBoop {
 		if(index > -1)
 			removeCensor(index);
 	}
+	
+	public static void setCensored(List<String> censored)
+	{
+		CENSOR_LIST = censored;
+	}
 
 }

@@ -1,5 +1,7 @@
 package info.insomniax.owhboop.core;
 
+import java.util.List;
+
 import info.insomniax.owhboop.vault.Permissions;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,11 +23,21 @@ public class BukkitPlugin extends JavaPlugin
 	{
 		p = new Permissions(this);
 		p.setupPermissions();
+		
+		initializeConfig();
 	}
 	
 	public void onDisable()
 	{
 		this.saveConfig();
+	}
+	
+	public void initializeConfig()
+	{
+		List<String> configCensorList = this.getConfig().getStringList("OWH.Boop.Censored");
+		
+		if(!configCensorList.isEmpty())
+			OWHBoop.setCensored(configCensorList);
 	}
 	
 	public static void sendMessage(String player, String message)

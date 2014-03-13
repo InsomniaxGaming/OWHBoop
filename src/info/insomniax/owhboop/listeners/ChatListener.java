@@ -24,7 +24,6 @@ public class ChatListener implements Listener{
 		//Only do anything to this event if it wasn't fired by the plugin.
 		if(!(e instanceof AsyncBoopChatEvent))
 		{
-			System.out.println("Not a plugin event");
 			String message = e.getMessage().toLowerCase();		
 			Set<Player> exceptions = new HashSet<Player>();
 			Set<Player> normals = new HashSet<Player>();
@@ -53,10 +52,6 @@ public class ChatListener implements Listener{
 			Bukkit.getPluginManager().callEvent(new AsyncBoopChatEvent(true, e.getPlayer(), message, normals));	
 			
 			e.setCancelled(true);
-		}
-		else
-		{
-			System.out.println("Is a plugin event: " + e.getRecipients());
 		}
 	}
 }

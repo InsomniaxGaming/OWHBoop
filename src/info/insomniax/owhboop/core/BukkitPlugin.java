@@ -1,8 +1,6 @@
 package info.insomniax.owhboop.core;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import info.insomniax.owhboop.listeners.ChatListener;
 import info.insomniax.owhboop.vault.Permissions;
@@ -11,8 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -91,8 +87,6 @@ public class BukkitPlugin extends JavaPlugin
 			{
 				for(int i = 0; i < OWHBoop.getCensored().size(); i++)
 					sendMessage(sender.getName(), i + ": " + OWHBoop.getCensored().get(i));
-				
-				Bukkit.getPluginManager().callEvent(new AsyncPlayerChatEvent(true,((Player)sender),"what the hell?",(Set<Player>)Arrays.asList(Bukkit.getOnlinePlayers())));
 				
 				return true;
 			}

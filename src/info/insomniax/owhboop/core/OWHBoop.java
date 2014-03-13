@@ -8,6 +8,7 @@ public class OWHBoop {
 	BukkitPlugin plugin;
 	
 	private static List<String> CENSOR_LIST = new ArrayList<String>();
+	private static List<String> NO_CENSOR_PEEPS = new ArrayList<String>();
 	
 	public OWHBoop(BukkitPlugin instance)
 	{
@@ -19,9 +20,19 @@ public class OWHBoop {
 		return CENSOR_LIST;
 	}
 	
+	public static List<String> getExceptions()
+	{
+		return NO_CENSOR_PEEPS;
+	}
+	
 	public static void addCensor(String censor)
 	{
-		CENSOR_LIST.add(censor);
+		CENSOR_LIST.add(censor.toLowerCase());
+	}
+	
+	public static void addException(String player)
+	{
+		NO_CENSOR_PEEPS.add(player);
 	}
 	
 	public static void removeCensor(int index)
@@ -45,9 +56,19 @@ public class OWHBoop {
 			removeCensor(index);
 	}
 	
+	public static void removeException(String player)
+	{
+		NO_CENSOR_PEEPS.remove(player);
+	}
+	
 	public static void setCensored(List<String> censored)
 	{
 		CENSOR_LIST = censored;
+	}
+	
+	public static void setExceptions(List<String> dontCensor)
+	{
+		NO_CENSOR_PEEPS = dontCensor;
 	}
 
 }

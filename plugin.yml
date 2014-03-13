@@ -1,8 +1,14 @@
 name: OWHBoop
-description: "The OWH Censorship Plugin!"
+description: 'The OWH Censorship Plugin!'
 version: 0.1
-main:info.insomniax.owhboop.core.BukkitPlugin
+main: info.insomniax.owhboop.core.BukkitPlugin
 commands:
   addcensor:
-    usage: "/addcensor <censor>"
-    description: "Adds the new word to the list of words to censor"
+    usage: '/addcensor <censor>'
+    description: 'Add the specified word/phrase to the list of things to censor'
+  listcensors:
+    usage: '/listcensors'
+    description: 'List all words/phrases currently being censored'
+  togglecensor:
+    usage: '/togglecensor'
+    description: 'Toggle whether or not censored words show up as "boop" or what they actually are.'

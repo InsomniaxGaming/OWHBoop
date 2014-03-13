@@ -1,13 +1,18 @@
 package info.insomniax.owhboop.core;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
+import info.insomniax.owhboop.listeners.ChatListener;
 import info.insomniax.owhboop.vault.Permissions;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -24,20 +29,38 @@ public class BukkitPlugin extends JavaPlugin
 		p = new Permissions(this);
 		p.setupPermissions();
 		
+		this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
+		
 		initializeConfig();
 	}
 	
 	public void onDisable()
 	{
+		this.saveCensored();
+		this.saveExceptions();
+		
 		this.saveConfig();
 	}
 	
 	public void initializeConfig()
 	{
 		List<String> configCensorList = this.getConfig().getStringList("OWH.Boop.Censored");
+		List<String> configExceptionList = this.getConfig().getStringList("OWH.Boop.Exceptions");
 		
 		if(!configCensorList.isEmpty())
 			OWHBoop.setCensored(configCensorList);
+		if(!configExceptionList.isEmpty())
+			OWHBoop.setExceptions(configExceptionList);
+	}
+	
+	public void saveCensored()
+	{
+		this.getConfig().set("OWH.Boop.Censored", OWHBoop.getCensored());
+	}
+	
+	public void saveExceptions()
+	{
+		this.getConfig().set("OWH.Boop.Exceptions", OWHBoop.getExceptions());
 	}
 	
 	public static void sendMessage(String player, String message)
@@ -59,8 +82,31 @@ public class BukkitPlugin extends JavaPlugin
 				if(args.length > 0)
 				{
 					OWHBoop.addCensor(StringUtils.join(args, " "));
+					sendMessage(sender.getName(), "Censor added");
+					
 					return true;
 				}
+			}
+			if(cmd.getName().equalsIgnoreCase("listcensors"))
+			{
+				for(int i = 0; i < OWHBoop.getCensored().size(); i++)
+					sendMessage(sender.getName(), i + ": " + OWHBoop.getCensored().get(i));
+				
+				Bukkit.getPluginManager().callEvent(new AsyncPlayerChatEvent(true,((Player)sender),"what the hell?",(Set<Player>)Arrays.asList(Bukkit.getOnlinePlayers())));
+				
+				return true;
+			}
+		}
+		if(p.has(sender, cmd, false))
+		{
+			if(cmd.getName().equalsIgnoreCase("togglecensor"))
+			{
+				if(OWHBoop.getExceptions().contains(sender.getName()))
+					OWHBoop.removeException(sender.getName());
+				else
+					OWHBoop.addException(sender.getName());
+				
+				return true;
 			}
 		}
 		return false;

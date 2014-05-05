@@ -9,6 +9,8 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -25,7 +27,7 @@ public class BukkitPlugin extends JavaPlugin
 		p = new Permissions(this);
 		p.setupPermissions();
 		
-		this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
+		this.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
 		
 		initializeConfig();
 	}
